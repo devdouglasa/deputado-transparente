@@ -1,7 +1,8 @@
 import { DeputadoCard } from '@/components/DeputadoCard';
-import { deputados } from '@/data/deputados';
+import { useEffect, useState } from 'react';
 import { Users, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Deputado } from '@/types/deputado';
 import { 
   Pagination,
   PaginationContent,
@@ -10,17 +11,32 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { useState } from 'react';
+
 
 const Index = () => {
+  const [deputados, setDeputados] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/v1/deputies')
+      .then(res => res.json())
+      .then(data => {
+        setDeputados(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Erro ao carregar deputados:', err);
+        setLoading(false);
+      });
+  }, []);
   
   const deputadosFiltrados = deputados.filter(deputado =>
     deputado.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    deputado.siglaPartido.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    deputado.siglaUf.toLowerCase().includes(searchTerm.toLowerCase())
+    deputado.sigla_partido.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    deputado.sigla_uf.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Resetar página ao filtrar
@@ -77,53 +93,55 @@ const Index = () => {
 
         {/* Grid de Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {deputadosPaginados.map((deputado) => (
+          {deputadosPaginados.map((deputado: Deputado) => (
             <DeputadoCard key={deputado.id} deputado={deputado} />
           ))}
         </div>
 
         {/* Paginação */}
         {totalPages > 1 && (
-          <Pagination className="mt-8">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious 
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (currentPage > 1) setCurrentPage(currentPage - 1);
-                  }}
-                  className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
-                />
-              </PaginationItem>
-              
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <PaginationItem key={page}>
-                  <PaginationLink
+          <div className="w-full overflow-x-auto">
+            <Pagination className="mx-auto w-fit">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious 
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      setCurrentPage(page);
+                      if (currentPage > 1) setCurrentPage(currentPage - 1);
                     }}
-                    isActive={currentPage === page}
-                  >
-                    {page}
-                  </PaginationLink>
+                    className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                  />
                 </PaginationItem>
-              ))}
-              
-              <PaginationItem>
-                <PaginationNext 
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-                  }}
-                  className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+                
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage(page);
+                      }}
+                      isActive={currentPage === page}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                
+                <PaginationItem>
+                  <PaginationNext 
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                    }}
+                    className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
         )}
 
         {deputadosFiltrados.length === 0 && (
