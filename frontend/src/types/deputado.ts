@@ -1,11 +1,11 @@
 export interface Deputado {
   id: string;
   nome: string;
-  siglaPartido: string;
-  siglaUf: string;
-  urlFoto: string;
+  sigla_partido: string;
+  sigla_uf: string;
+  url_foto: string;
   sexo: string;
-  dataNascimento: string;
+  data_nascimento: string;
 }
 
 export interface Despesa {

@@ -38,7 +38,7 @@ export const DeputadoCard = ({ deputado }: DeputadoCardProps) => {
       <CardContent className="p-6">
         <div className="flex items-start gap-4">
           <Avatar className="w-16 h-16">
-            <AvatarImage src={deputado.urlFoto} alt={deputado.nome} />
+            <AvatarImage src={deputado.url_foto} alt={deputado.nome} />
             <AvatarFallback className="bg-primary text-primary-foreground">
               {getInitials(deputado.nome)}
             </AvatarFallback>
@@ -50,23 +50,23 @@ export const DeputadoCard = ({ deputado }: DeputadoCardProps) => {
             </h3>
             
             <div className="flex flex-wrap gap-2 mb-3">
-              <Badge className={`${getPartidoCor(deputado.siglaPartido)} text-white`}>
-                {deputado.siglaPartido}
+              <Badge className={`${getPartidoCor(deputado.sigla_partido)} text-white`}>
+                {deputado.sigla_partido}
               </Badge>
               <Badge variant="outline" className="flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
-                {deputado.siglaUf}
+                {deputado.sigla_uf}
               </Badge>
             </div>
             
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
-                <span>{deputado.sexo === 'M' ? 'Masculino' : 'Feminino'}</span>
+                <span>{deputado.sexo == 'M' ? 'Masculino' : 'Feminino'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>{formatarData(deputado.dataNascimento)}</span>
+                <span>{formatarData(deputado.data_nascimento)}</span>
               </div>
             </div>
           </div>

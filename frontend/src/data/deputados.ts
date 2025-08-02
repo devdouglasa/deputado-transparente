@@ -4,56 +4,56 @@ export const deputados: Deputado[] = [
   {
     id: '1',
     nome: 'Maria Santos Silva',
-    siglaPartido: 'PT',
-    siglaUf: 'SP',
-    urlFoto: 'https://images.unsplash.com/photo-1494790108755-2616b612b502?w=150&h=150&fit=crop&crop=face',
+    sigla_partido: 'PT',
+    sigla_uf: 'SP',
+    url_foto: 'https://images.unsplash.com/photo-1494790108755-2616b612b502?w=150&h=150&fit=crop&crop=face',
     sexo: 'F',
-    dataNascimento: '1975-03-15'
+    data_nascimento: '1975-03-15'
   },
   {
     id: '2',
     nome: 'João Carlos Oliveira',
-    siglaPartido: 'PSDB',
-    siglaUf: 'RJ',
-    urlFoto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    sigla_partido: 'PSDB',
+    sigla_uf: 'RJ',
+    url_foto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     sexo: 'M',
-    dataNascimento: '1968-08-22'
+    data_nascimento: '1968-08-22'
   },
   {
     id: '3',
     nome: 'Ana Paula Ferreira',
-    siglaPartido: 'PDT',
-    siglaUf: 'MG',
-    urlFoto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    sigla_partido: 'PDT',
+    sigla_uf: 'MG',
+    url_foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
     sexo: 'F',
-    dataNascimento: '1982-11-08'
+    data_nascimento: '1982-11-08'
   },
   {
     id: '4',
     nome: 'Roberto Lima Costa',
-    siglaPartido: 'PL',
-    siglaUf: 'RS',
-    urlFoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    sigla_partido: 'PL',
+    sigla_uf: 'RS',
+    url_foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
     sexo: 'M',
-    dataNascimento: '1971-05-30'
+    data_nascimento: '1971-05-30'
   },
   {
     id: '5',
     nome: 'Fernanda Almeida',
-    siglaPartido: 'PSOL',
-    siglaUf: 'BA',
-    urlFoto: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
+    sigla_partido: 'PSOL',
+    sigla_uf: 'BA',
+    url_foto: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
     sexo: 'F',
-    dataNascimento: '1979-12-03'
+    data_nascimento: '1979-12-03'
   },
   {
     id: '6',
     nome: 'Carlos Eduardo Souza',
-    siglaPartido: 'MDB',
-    siglaUf: 'PR',
-    urlFoto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
+    sigla_partido: 'MDB',
+    sigla_uf: 'PR',
+    url_foto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
     sexo: 'M',
-    dataNascimento: '1965-01-18'
+    data_nascimento: '1965-01-18'
   }
 ];
 
