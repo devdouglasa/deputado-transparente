@@ -47,9 +47,6 @@ php artisan serve
 
 A primeira vez que iniciar irá demorar um pouco pois o banco de dados será sincronizado com a API da camara.
 
-#
-
-Link do projeto rodando: http://15.228.99.228/
 
 #
 
