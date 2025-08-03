@@ -30,11 +30,6 @@ class SyncExpensesJob implements ShouldQueue
     {
         $deputies = Deputie::get();
 
-        if (empty($deputie))
-        {
-            return throw new Exception("Não foram encontradas informações de deputados!");
-        }
-
         foreach ($deputies as $deputie) {
             $expenses = Http::get("https://dadosabertos.camara.leg.br/api/v2/deputados/" . $deputie['id'] . "/despesas")['dados'];
 
