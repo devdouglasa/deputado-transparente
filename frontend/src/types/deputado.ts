@@ -9,12 +9,14 @@ export interface Deputado {
 }
 
 export interface Despesa {
-  id: string;
-  tipoDespesa: string;
-  valor: number;
+  deputado_id: string;
+  ano: string;
+  mes: string;
+  tipo_despesa: string;
+  valor_documento: number;
   fornecedor: string;
-  dataDocumento: string;
-  numeroDocumento: string;
+  data_documento: string;
+  num_documento: string;
 }
 
 export interface GastosDeputado {
