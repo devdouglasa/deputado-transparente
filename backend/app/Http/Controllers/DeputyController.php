@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SyncDeputiesExpensesJob;
+use App\Jobs\SyncDeputiesJob;
+use App\Jobs\SyncExpensesJob;
 use App\Models\Deputie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class DeputyController extends Controller
 {
     function index(Request $request)
     {
-        SyncDeputiesExpensesJob::dispatch();
+        // SyncDeputiesJob::dispatch();
+        // SyncExpensesJob::dispatch();
 
         $deputies = Deputie::get();
 
