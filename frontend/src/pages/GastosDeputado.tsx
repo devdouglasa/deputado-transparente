@@ -4,24 +4,35 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { ArrowLeft, TrendingUp, DollarSign, FileText, Calendar } from 'lucide-react';
-import { gastosDeputados } from '@/data/deputados';
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, PieChart, Pie, Cell } from 'recharts';
+import { useEffect, useState } from 'react';
 
 export const GastosDeputado = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
-  const gastosData = id ? gastosDeputados[id] : null;
+
+  const [gastosData, setGastosData] = useState<{
+    deputado: any;
+    despesas: any[];
+    totalGasto: number;
+  } | null>(null);
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/v1/deputies/${id}/expenses`)
+    .then(res => res.json())
+    .then(data => {
+      setGastosData(data)
+    })
+    .catch(err => {
+      console.error('Erro ao carregar as despesas:', err);
+    });
+  });
   
   if (!gastosData) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Deputado não encontrado</h1>
-          <Button onClick={() => navigate('/')}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar
-          </Button>
+          <h1 className="text-2xl font-bold mb-4">Carregando despesas...</h1>
         </div>
       </div>
     );
@@ -39,18 +50,18 @@ export const GastosDeputado = () => {
 
   // Agregar despesas por tipo para o gráfico
   const despesasPorTipo = despesas.reduce((acc, despesa) => {
-    const tipo = despesa.tipoDespesa;
+    const tipo = despesa.tipo_despesa;
     if (!acc[tipo]) {
       acc[tipo] = 0;
     }
-    acc[tipo] += despesa.valor;
+    acc[tipo] += despesa.valor_documento;
     return acc;
   }, {} as Record<string, number>);
 
   const chartData = Object.entries(despesasPorTipo).map(([tipo, valor]) => ({
     tipo,
     valor,
-    valorFormatado: formatCurrency(valor)
+    valorFormatado: formatCurrency(valor as number)
   }));
 
   const pieColors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'];
@@ -73,12 +84,14 @@ export const GastosDeputado = () => {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Voltar para Lista
           </Button>
+
           
+
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center gap-6">
                 <Avatar className="w-20 h-20">
-                  <AvatarImage src={deputado.urlFoto} alt={deputado.nome} />
+                  <AvatarImage src={deputado.url_foto} alt={deputado.nome} />
                   <AvatarFallback className="bg-primary text-primary-foreground text-xl">
                     {getInitials(deputado.nome)}
                   </AvatarFallback>
@@ -90,7 +103,7 @@ export const GastosDeputado = () => {
                   </h1>
                   <div className="flex gap-3">
                     <Badge variant="outline" className="text-base px-3 py-1">
-                      {deputado.siglaPartido} - {deputado.siglaUf}
+                      {deputado.sigla_partido} - {deputado.sigla_uf}
                     </Badge>
                     <Badge variant="secondary" className="text-base px-3 py-1">
                       {despesas.length} despesas registradas
@@ -218,26 +231,26 @@ export const GastosDeputado = () => {
             <div className="space-y-4">
               {despesas.map((despesa) => (
                 <div 
-                  key={despesa.id}
+                  key={despesa.deputado_id}
                   className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
                 >
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <Badge variant="outline">{despesa.tipoDespesa}</Badge>
+                        <Badge variant="outline">{despesa.tipo_despesa}</Badge>
                         <span className="text-sm text-muted-foreground flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
-                          {new Date(despesa.dataDocumento).toLocaleDateString('pt-BR')}
+                          {new Date(despesa.data_documento).toLocaleDateString('pt-BR')}
                         </span>
                       </div>
                       <h4 className="font-medium mb-1">{despesa.fornecedor}</h4>
                       <p className="text-sm text-muted-foreground">
-                        Documento: {despesa.numeroDocumento}
+                        Documento: {despesa.num_documento}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="text-xl font-bold text-primary">
-                        {formatCurrency(despesa.valor)}
+                        {formatCurrency(despesa.valor_documento)}
                       </p>
                     </div>
                   </div>
