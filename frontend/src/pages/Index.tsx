@@ -51,6 +51,36 @@ const Index = () => {
   const endIndex = startIndex + itemsPerPage;
   const deputadosPaginados = deputadosFiltrados.slice(startIndex, endIndex);
 
+  // Limitando a quantidade de números paginados
+  const getVisiblePages = (currentPage: number, totalPages: number) => {
+    const pages: (number | 'dots')[] = [];
+
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+      return pages;
+    }
+
+    pages.push(1); // Sempre mostra a primeira
+
+    if (currentPage > 4) pages.push('dots');
+
+    const startPage = Math.max(2, currentPage - 1);
+    const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    if (currentPage < totalPages - 3) pages.push('dots');
+
+    pages.push(totalPages); // Sempre mostra a última
+
+    return pages;
+  };
+
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -114,18 +144,22 @@ const Index = () => {
                   />
                 </PaginationItem>
                 
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <PaginationItem key={page}>
-                    <PaginationLink
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentPage(page);
-                      }}
-                      isActive={currentPage === page}
-                    >
-                      {page}
-                    </PaginationLink>
+                {getVisiblePages(currentPage, totalPages).map((page, index) => (
+                  <PaginationItem key={index}>
+                    {page === 'dots' ? (
+                      <span className="px-2 text-muted-foreground">...</span>
+                    ) : (
+                      <PaginationLink
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentPage(page);
+                        }}
+                        isActive={currentPage === page}
+                      >
+                        {page}
+                      </PaginationLink>
+                    )}
                   </PaginationItem>
                 ))}
                 
