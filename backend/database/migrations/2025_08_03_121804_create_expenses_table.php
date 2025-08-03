@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('fornecedor')->nullable();
             $table->decimal('valor_documento', 10, 2)->default(0);
             $table->date('data_documento')->nullable();
+            $table->string('num_documento')->nullable();
             $table->timestamps();
             $table->foreign('deputado_id')->references('id')->on('deputies')->onDelete('cascade');
         });
