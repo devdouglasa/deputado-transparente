@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use App\Models\Expense;
 use App\Models\Deputie;
 
@@ -13,7 +12,7 @@ class ExpenseController extends Controller
     {
         $deputy = Deputie::findOrFail($id);
 
-        $expenses = Expense::query()->where("deputado_id", $deputy->id)->get();
+        $expenses = Expense::query()->where("deputado_id", $deputy->id)->orderBy('data_documento', 'desc')->get();
 
         $totalExpenses = $expenses->sum('valor_documento');
 
