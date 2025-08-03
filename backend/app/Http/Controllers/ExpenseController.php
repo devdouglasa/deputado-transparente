@@ -15,6 +15,8 @@ class ExpenseController extends Controller
 
         $expenses = Expense::query()->where("deputado_id", $deputy->id)->get();
 
-        return response()->json($expenses);
+        $totalExpenses = $expenses->sum('valor_documento');
+
+        return response()->json(['deputado' => $deputy, 'despesas' => $expenses, 'totalGasto' => $totalExpenses]);
     }
 }
