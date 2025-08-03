@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Http;
 use App\Models\Deputie;
 
-class SyncDeputiesExpensesJob implements ShouldQueue
+class SyncDeputiesJob implements ShouldQueue
 {
     use Queueable, Dispatchable, InteractsWithQueue, SerializesModels;
 
