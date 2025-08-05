@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     libwebp-dev \
     libzip-dev \
     unzip \
+    ca-certificates \
     && docker-php-ext-install pdo_mysql gd exif opcache \
     && a2enmod rewrite
 
@@ -21,6 +22,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copia os arquivos do seu projeto Laravel para o container
 COPY . .
+
+# Copia o certificado para o container
+COPY ./docker/ssl/cacert.pem /usr/local/share/ca-certificates/cacert.pem
+
+# Atualiza a lista de certificados para incluir o novo
+RUN update-ca-certificates
 
 # Instala as dependências do Laravel
 RUN composer install --no-dev --optimize-autoloader
