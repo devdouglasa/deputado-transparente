@@ -11,8 +11,8 @@ class DeputyController extends Controller
 {
     function index(Request $request)
     {
-        // SyncDeputiesJob::dispatch();
-        // SyncExpensesJob::dispatch();
+        SyncDeputiesJob::dispatch();
+        SyncExpensesJob::dispatch();
 
         $deputies = Deputie::get();
 
