@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('nome_civil')->nullable();
             $table->string('sigla_uf', 2);
-            $table->string('sigla_partido', 10)->nullable();
+            $table->string('sigla_partido', 20)->nullable();
             $table->string('url_foto')->nullable();
             $table->string('sexo')->nullable();
             $table->string('data_nascimento')->nullable();
