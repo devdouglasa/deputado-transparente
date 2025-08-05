@@ -18,7 +18,7 @@ export const GastosDeputado = () => {
   } | null>(null);
 
   useEffect(() => {
-    fetch(`http://backend/api/v1/deputies/${id}/expenses`)
+    fetch(`http://localhost:8000/api/v1/deputies/${id}/expenses`)
     .then(res => res.json())
     .then(data => {
       setGastosData(data)

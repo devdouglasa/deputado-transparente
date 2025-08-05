@@ -21,7 +21,7 @@ const Index = () => {
   const itemsPerPage = 6;
 
   useEffect(() => {
-    fetch('http://backend/api/v1/deputies')
+    fetch('http://localhost:8000/api/v1/deputies')
       .then(res => res.json())
       .then(data => {
         setDeputados(data);
