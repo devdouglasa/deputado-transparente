@@ -11,10 +11,13 @@ class DeputyController extends Controller
 {
     function index(Request $request)
     {
-        SyncDeputiesJob::dispatch();
-        SyncExpensesJob::dispatch();
-
         $deputies = Deputie::get();
+
+        if (count($deputies) < 5)
+        {
+            SyncDeputiesJob::dispatch();
+            SyncExpensesJob::dispatch();
+        }
 
         return response()->json($deputies);
     }
