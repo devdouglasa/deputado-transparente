@@ -36,8 +36,8 @@ RUN composer install --no-dev --optimize-autoloader
 COPY ./docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Atualiza permissões das pastas
-RUN chown -R www-data:www-data /var/www/html/storage \
-    && chown -R www-data:www-data /var/www/html/bootstrap/cache
+RUN chmod -R 777 /var/www/html/storage \
+    && chmod -R 777 /var/www/html/bootstrap/cache
 
 # Expõe a porta 80
 EXPOSE 80
