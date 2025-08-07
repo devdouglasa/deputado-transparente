@@ -18,7 +18,7 @@ export const GastosDeputado = () => {
   } | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/v1/deputies/${id}/expenses`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/deputies/${id}/expenses`)
     .then(res => res.json())
     .then(data => {
       setGastosData(data)

@@ -15,21 +15,18 @@ import {
 
 const Index = () => {
   const [deputados, setDeputados] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/v1/deputies`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/v1/deputies`)
       .then(res => res.json())
       .then(data => {
         setDeputados(data);
-        setLoading(false);
       })
       .catch(err => {
         console.error('Erro ao carregar deputados:', err);
-        setLoading(false);
       });
   }, []);
   
