@@ -26,7 +26,7 @@ export const GastosDeputado = () => {
     .catch(err => {
       console.error('Erro ao carregar as despesas:', err);
     });
-  }, []);
+  }, [id]);
   
   if (!gastosData) {
     return (
@@ -54,7 +54,7 @@ export const GastosDeputado = () => {
     if (!acc[tipo]) {
       acc[tipo] = 0;
     }
-    acc[tipo] += despesa.valor_documento;
+    acc[tipo] += Number(despesa.valor_documento);
     return acc;
   }, {} as Record<string, number>);
 
