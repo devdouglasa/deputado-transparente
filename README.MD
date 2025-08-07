@@ -10,18 +10,23 @@
 <img width=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" /> &nbsp;&nbsp;&nbsp;&nbsp;
 <img width=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
 <img width=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
-<img width=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" />
+<img width=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" />&nbsp;&nbsp;&nbsp;&nbsp;
+<img width=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" />
           
 #
 
 ### Iniciando o projeto:
-Instale as dependencias do projeto:
+Docker Compose:
 ```
-composer install
+git clone https://github.com/devdouglasa/deputado-transparente.git
+```
+Entre na pasta do projeto:
+```
+cd deputado-transparente
 ```
 Copie o arquivo .env:
 ```
-cp .env-example .env
+cp backend/.env-example backend/.env
 ```
 Configure o .env para o seu banco de dados:
 ```
@@ -32,21 +37,15 @@ DB_DATABASE=laravel
 DB_USERNAME=laravel
 DB_PASSWORD=root
 ```
-Gerar o app key do laravel:
+Buildar a imagem docker:
 ```
-php artisan key:generate
+docker-compose up -d --build
 ```
-Crie as migrations:
-```
-php artisan migrate
-```
-Inicie o projeto:
-```
-php artisan serve
-```
+
 
 A primeira vez que iniciar irá demorar um pouco pois o banco de dados será sincronizado com a API da camara.
 
+Link em produção: http://15.228.99.228/
 
 #
 
