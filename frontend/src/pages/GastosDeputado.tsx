@@ -26,7 +26,7 @@ export const GastosDeputado = () => {
     .catch(err => {
       console.error('Erro ao carregar as despesas:', err);
     });
-  });
+  }, [id]);
   
   if (!gastosData) {
     return (
