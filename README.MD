@@ -45,7 +45,7 @@ docker-compose up -d --build
 
 A primeira vez que iniciar irá demorar um pouco pois o banco de dados será sincronizado com a API da camara.
 
-Link em produção: http://15.228.99.228/
+Link em produção: deputado-transparente.site
 
 #
 
